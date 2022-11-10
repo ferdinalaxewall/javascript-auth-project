@@ -20,7 +20,7 @@ export const getProductById = async (req, res) => {
             }
         });
 
-        if(!response) return res.status(404).json({msg : "Produk tidak ditemukan!"})
+        if(!response) return res.status(404).json({msg : "Produk not found!"})
         res.status(200).json(response)
     } catch (error) {
         res.status(500).json({msg : error.message})
@@ -48,7 +48,7 @@ export const updateProduct = async (req, res) => {
         }
     })
 
-    if(!product) return res.status(404).json({msg : "Produk tidak ditemeukan"})
+    if(!product) return res.status(404).json({msg : "Produk not found!"})
     const { name, price } = req.body;
     
     try {
@@ -75,7 +75,7 @@ export const deleteProduct = async (req, res) => {
         }
     })
 
-    if(!product) return res.status(404).json({msg : "Produk tidak ditemeukan"})
+    if(!product) return res.status(404).json({msg : "Product not found!"})
 
     try {
         await Product.destroy({
