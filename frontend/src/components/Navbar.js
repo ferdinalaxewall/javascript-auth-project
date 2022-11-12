@@ -1,7 +1,18 @@
 import React from 'react'
-import { NavLink } from "react-router-dom"
+import { useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from "react-router-dom"
+import { Logout, reset } from '../features/AuthSlice';
 
 const Navbar = () => {
+  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const LogoutSession = () => {
+      dispatch(Logout());
+      dispatch(reset());
+      navigate("/")
+  }
   return (
     <div>
         <nav className="navbar is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
@@ -22,7 +33,7 @@ const Navbar = () => {
             <div className="navbar-end">
               <div className="navbar-item">
                 <div className="buttons">
-                  <button className="button is-light"> Log Out </button>
+                  <button onClick={LogoutSession} className="button is-light"> Log Out </button>
                 </div>
               </div>
             </div>

@@ -20,6 +20,9 @@ export const getUserById = async (req, res) => {
                 uuid : req.params.id
             }
         });
+        
+        if(!response) return res.status(404).json({msg : "User not found!"});
+
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({msg : error.message})
@@ -28,7 +31,7 @@ export const getUserById = async (req, res) => {
 
 export const createUser = async (req, res) => {
     const { name, email, password, confirmPassword, role } = req.body;
-    if(password !== confirmPassword) return res.status(400).json({msg : "Passwordd dan Confirm Password tidak cocok!"});
+    if(password !== confirmPassword) return res.status(400).json({msg : "Password and Confirm Password not match!"});
     const hashPassword = await argon2.hash(password);
     try {
         await User.create({
